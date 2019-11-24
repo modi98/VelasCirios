@@ -20,13 +20,34 @@
                     <a class="navbar-brand" href="home.jsp">Velas y Cirios Decorativos</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Page 1</a></li>
-                    <li><a href="#">Page 2</a></li>
+                    <li class="active"><a href="home.jsp">Inicio</a></li>
+                    <li><a href="#">Agregar pedido</a></li>
+                    <li><a href="#">Lista de pedidos</a></li>
+                    <%
+                        String rol = (String) session.getAttribute("rol");
+                        if (rol.equals("admin")) {
+                    %>
+                        <li><a href="#">Administrar usuarios</a></li>
+                    <%
+                        }
+                    %>
                     <li><a href="Logout">Cerrar sesión</a></li>
                 </ul>
             </div>
         </nav>
-        <h1>Hello World!</h1>
+        <center>
+            <div class="home-div rounded primary-background">
+                <img src="assets/logoWhite.png" style="width: 20px;">
+                <h1 class="white-text">Bienvenido, <%=session.getAttribute("nombre")%></h1><br>
+                <h4 class="white-text">Esta es la plataforma inteligente de Velas y Cirios Decorativos. A través de esta plataforma podrás registrar los pedidos de los clientes y enviarlas instantáneamente a la base de datos que podrá ser consultada por todos los usuarios de la plataforma con conexión a internet.</h4>
+                <br>
+                <img src="assets/ss1.png" style="width: 600px;">
+                <h4 class="white-text">Para agregar un pedido elige la opción agregar pedido en el menú principal y completa el formulario.</h4>
+                <br>
+                <img src="assets/ss2.png" style="width: 600px;">
+                <h4 class="white-text">También puedes ver la lista de pedidos actuales seleccionando Lista de pedidos en el menú principal, ahí podrás ver detalles del pedido y marcarlo como entregado.</h4>
+                <h4 class="white-text"><b>No olvides cerrar sesión al salir.</b></h4>
+            </div>
+        </center>
     </body>
 </html>

@@ -24,6 +24,11 @@ and open the template in the editor.
     width: 600px;
 }
 
+.home-div {
+    padding: 20px;
+    width: 800px;
+}
+
 .white-text {
     color: #FFFFFF;
 }
