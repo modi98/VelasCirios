@@ -40,6 +40,7 @@ public class PedidosHandler {
             + "nombreCliente VARCHAR(50) NOT NULL,"
             + "tel VARCHAR(30) NOT NULL,"
             + "fechaEntrega DATE NOT NULL,"
+            + "entregado BOOLEAN NOT NULL,"
             + "descripcion TEXT NOT NULL);";
         
         this.stmt.execute(query);
@@ -48,24 +49,30 @@ public class PedidosHandler {
     public void createPedido(String nombreCliente, String tel, String fechaEntrega, String descripcion) throws SQLException {
         this.checkForDB();
         this.checkForTable();
-        String query = "INSERT INTO pedidos (nombreCliente, tel, fechaEntrega, descripcion)" +
-                   "VALUES ('" + nombreCliente + "', '" + tel + "', '" + fechaEntrega + "', '" + descripcion + "');";
+        String query = "INSERT INTO pedidos (nombreCliente, tel, fechaEntrega, entregado, descripcion)" +
+                   "VALUES ('" + nombreCliente + "', '" + tel + "', '" + fechaEntrega + "', false, '" + descripcion + "');";
         this.stmt.execute(query);
     }
     
     public ArrayList<Pedido> getPedidos() throws SQLException {
         this.checkForDB();
         this.checkForTable();
-        ResultSet rs = this.stmt.executeQuery("SELECT id, nombreCliente, tel, fechaEntrega, descripcion FROM pedidos");
+        ResultSet rs = this.stmt.executeQuery("SELECT id, nombreCliente, tel, fechaEntrega, entregado, descripcion FROM pedidos");
         ArrayList<Pedido> result = new ArrayList<Pedido>();
         while (rs.next()) {
             try {
-                result.add(new Pedido(rs.getString("nombreCliente"), rs.getString("tel"), rs.getTimestamp("fechaEntrega"), rs.getString("descripcion")));
+                result.add(new Pedido(rs.getInt("id"), rs.getString("nombreCliente"), rs.getString("tel"), rs.getTimestamp("fechaEntrega"), rs.getBoolean("entregado"), rs.getString("descripcion")));
             } catch (Exception _) {
                 
             }
         }
         return result;
+    }
+    
+    public void entregarPedido(String pedidoId) throws SQLException {
+        this.checkForDB();
+        this.checkForTable();
+        this.stmt.execute("UPDATE pedidos SET entregado = true WHERE id = " + pedidoId);
     }
     
     public void closeConnection() throws SQLException {
