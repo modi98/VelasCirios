@@ -5,10 +5,13 @@
  */
 package com.dbHandlers;
 
+import com.model.Pedido;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -37,7 +40,7 @@ public class PedidosHandler {
             + "nombreCliente VARCHAR(50) NOT NULL,"
             + "tel VARCHAR(30) NOT NULL,"
             + "fechaEntrega DATE NOT NULL,"
-            + "descripcion VARCHAR(255) NOT NULL);";
+            + "descripcion TEXT NOT NULL);";
         
         this.stmt.execute(query);
     }
@@ -48,6 +51,21 @@ public class PedidosHandler {
         String query = "INSERT INTO pedidos (nombreCliente, tel, fechaEntrega, descripcion)" +
                    "VALUES ('" + nombreCliente + "', '" + tel + "', '" + fechaEntrega + "', '" + descripcion + "');";
         this.stmt.execute(query);
+    }
+    
+    public ArrayList<Pedido> getPedidos() throws SQLException {
+        this.checkForDB();
+        this.checkForTable();
+        ResultSet rs = this.stmt.executeQuery("SELECT id, nombreCliente, tel, fechaEntrega, descripcion FROM pedidos");
+        ArrayList<Pedido> result = new ArrayList<Pedido>();
+        while (rs.next()) {
+            try {
+                result.add(new Pedido(rs.getString("nombreCliente"), rs.getString("tel"), rs.getTimestamp("fechaEntrega"), rs.getString("descripcion")));
+            } catch (Exception _) {
+                
+            }
+        }
+        return result;
     }
     
     public void closeConnection() throws SQLException {

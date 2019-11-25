@@ -81,7 +81,7 @@ public class CrearPedido extends HttpServlet {
             ph.createPedido(nombreCliente, tel, fechaEntrega, descripcion);
             ph.closeConnection();
             PrintWriter out = response.getWriter();
-            out.println("AYEEEEEEE");
+            response.sendRedirect("listaPedidos.jsp");
             
         } catch (SQLException e) {
             response.setContentType("text/plain");

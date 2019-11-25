@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="home.jsp">Inicio</a></li>
                     <li><a href="agregarPedido.jsp">Agregar pedido</a></li>
-                    <li><a href="#">Lista de pedidos</a></li>
+                    <li><a href="listaPedidos.jsp">Lista de pedidos</a></li>
                     <%
                         String rol = (String) session.getAttribute("rol");
                         if (rol.equals("admin")) {
