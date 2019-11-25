@@ -24,11 +24,16 @@ and open the template in the editor.
     width: 600px;
 }
 
+.home-div {
+    padding: 20px;
+    width: 800px;
+}
+
 .white-text {
     color: #FFFFFF;
 }
 
-input[type=text], input[type=password], select {
+input[type=text], input[type=password], input[type=date], textarea, select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
