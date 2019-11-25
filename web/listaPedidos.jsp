@@ -30,7 +30,7 @@
                         String rol = (String) session.getAttribute("rol");
                         if (rol.equals("admin")) {
                     %>
-                        <li><a href="#">Administrar usuarios</a></li>
+                        <li><a href="listaUsuarios.jsp">Administrar usuarios</a></li>
                     <%
                         }
                     %>

@@ -24,6 +24,14 @@
         <servlet-name>EntregarPedido</servlet-name>
         <servlet-class>com.servlet.EntregarPedido</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActualizarUsuario</servlet-name>
+        <servlet-class>com.servlet.ActualizarUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CrearUsuario</servlet-name>
+        <servlet-class>com.servlet.CrearUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>EntregarPedido</servlet-name>
         <url-pattern>/EntregarPedido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActualizarUsuario</servlet-name>
+        <url-pattern>/ActualizarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearUsuario</servlet-name>
+        <url-pattern>/CrearUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
