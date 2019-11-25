@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -73,29 +74,34 @@ public class ActualizarUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int usuarioId = Integer.valueOf(request.getParameter("usuarioId"));
-        String nombre = request.getParameter("nombre");
-        String correo = request.getParameter("correo");
-        String rol = request.getParameter("rol");
-        
-        try {
-            LoginHandler uh = new LoginHandler();
-            uh.actualizarUsuario(usuarioId, nombre, correo, rol);
-            response.sendRedirect("listaUsuarios.jsp");
-            
-        } catch (SQLException e) {
-            response.setContentType("text/plain");
-            response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(true);
+        if (!session.getAttribute("rol").equals("admin")) {
+            response.sendRedirect("home.jsp");
+        } else {
+            int usuarioId = Integer.valueOf(request.getParameter("usuarioId"));
+            String nombre = request.getParameter("nombre");
+            String correo = request.getParameter("correo");
+            String rol = request.getParameter("rol");
 
-            PrintWriter out = response.getWriter();
-            out.println(e);
-            
-        } catch (ClassNotFoundException e) {
-            response.setContentType("text/plain");
-            response.setCharacterEncoding("UTF-8");
+            try {
+                LoginHandler uh = new LoginHandler();
+                uh.actualizarUsuario(usuarioId, nombre, correo, rol);
+                response.sendRedirect("listaUsuarios.jsp");
 
-            PrintWriter out = response.getWriter();
-            out.println(e);
+            } catch (SQLException e) {
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+
+                PrintWriter out = response.getWriter();
+                out.println(e);
+
+            } catch (ClassNotFoundException e) {
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+
+                PrintWriter out = response.getWriter();
+                out.println(e);
+            }
         }
     }
 
