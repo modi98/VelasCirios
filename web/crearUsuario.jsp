@@ -1,18 +1,15 @@
 <%-- 
-    Document   : listaUsuarios
-    Created on : Nov 24, 2019, 8:39:25 PM
+    Document   : crearUsuario
+    Created on : Nov 24, 2019, 9:37:54 PM
     Author     : mauri
 --%>
 
-<%@page import="com.model.Usuario"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.dbHandlers.LoginHandler"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de usuarios</title>
+        <title>Crear usuario</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
     </head>
@@ -39,27 +36,23 @@
             </div>
         </nav>
         <center>
-            <a href="crearUsuario.jsp">Crear usuario</a><br><br>
-            <div class="home-div rounded primary-background">
-                <%
-                    LoginHandler uh = new LoginHandler();
-                    ArrayList<Usuario> usuarios = uh.getUsers();
-                    for (Usuario usuario : usuarios) {
-                %>
-                    <h4 class="white-text">Nombre: <%=usuario.nombre%></h4>
-                    <h4 class="white-text">Correo: <%=usuario.correo%></h4>
-                    <h4 class="white-text">Rol: <%=usuario.rol%></h4>
-                    <form action="actualizarUsuario.jsp" method="POST">
-                        <input type="hidden" name="usuarioId" value="<%=usuario.id%>">
-                        <input type="hidden" name="nombre" value="<%=usuario.nombre%>">
-                        <input type="hidden" name="correo" value="<%=usuario.correo%>">
-                        <input type="hidden" name="rol" value="<%=usuario.rol%>">
-                        <input type="submit" value="Actualizar">
-                    </form>
-                    <hr>
-                <%
-                    }
-                %>
+            <div class="login-div rounded primary-background">
+                <h3 class="white-text">Crear usuario</h3>
+                <form action="CrearUsuario" method="POST">
+                    <label class="white-text">Nombre</label>
+                    <input type="text" name="nombre" placeholder="Ingresa el nombre del usuario.." required>
+                    
+                    <label class="white-text">Correo</label>
+                    <input type="text" name="correo" placeholder="Ingresa el correo del usuario.." required>
+                    
+                    <label class="white-text">Rol</label>
+                    <input type="text" name="rol" placeholder="Ingresa el rol del usuario.." required>
+                    
+                    <label class="white-text">Contraseña</label>
+                    <input type="text" name="pass" placeholder="Ingresa la contraseña del usuario.." required>
+                    
+                    <input type="submit" value="Crear">
+                </form>
             </div>
         </center>
     </body>

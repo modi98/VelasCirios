@@ -45,10 +45,13 @@ public class LoginHandler {
     }
     
     public void createUser(String correo, String nombre, String password, String rol) throws SQLException {
-        String query = "INSERT INTO Registration (correo, nombre, pass, rol)" +
+        this.checkForDB();
+        this.checkForTable();
+        String query = "INSERT INTO usuarios (correo, nombre, pass, rol)" +
                    "VALUES ('" + correo + "', '" + nombre + "', '" + password + "', '" + rol + "')";
         
         this.stmt.execute(query);
+        this.stmt.close();
     }
     
     public void actualizarUsuario(int usuarioId, String nombre, String correo, String rol) throws SQLException {
