@@ -51,6 +51,25 @@ public class LoginHandler {
         this.stmt.execute(query);
     }
     
+    public ArrayList<Usuario> getUsers() throws SQLException {
+        this.checkForDB();
+        this.checkForTable();
+        
+        String query = "SELECT id, correo, nombre, rol FROM usuarios";
+        ResultSet rs = this.stmt.executeQuery(query);
+        
+        ArrayList<Usuario> result = new ArrayList<Usuario>();
+        while (rs.next()) {
+            int c1 = rs.getInt("id");
+            String c2 = rs.getString("correo");
+            String c3 = rs.getString("nombre");
+            String c4 = rs.getString("rol");
+            result.add(new Usuario(c1, c2, c3, c4));
+        }
+        this.stmt.close();
+        return result;
+    }
+    
     public ArrayList<Usuario> getUser(String correo, String pass) throws SQLException {
         this.checkForDB();
         this.checkForTable();
