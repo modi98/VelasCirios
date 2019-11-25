@@ -44,13 +44,23 @@
                     PedidosHandler ph = new PedidosHandler();
                     ArrayList<Pedido> pedidos = ph.getPedidos();
                     for (Pedido pedido : pedidos) {
+                        if (!pedido.entregado) {
                 %>
                     <h4 class="white-text">Nombre de cliente: <%=pedido.nombreCliente%></h4>
                     <h4 class="white-text">Teléfono: <%=pedido.tel%></h4>
                     <h4 class="white-text">Fecha de entrega: <%=pedido.fechaEntrega%></h4>
                     <textarea id="descripcion" name="descripcion" rows="10" cols="30" disabled><%=pedido.descripcion%></textarea>
+                    <form action="entregarPedido.jsp" method="POST">
+                        <input type="hidden" name="pedidoId" value="<%=pedido.id%>">
+                        <input type="hidden" name="nombreCliente" value="<%=pedido.nombreCliente%>">
+                        <input type="hidden" name="tel" value="<%=pedido.tel%>">
+                        <input type="hidden" name="fechaEntrega" value="<%=pedido.fechaEntrega%>">
+                        <input type="hidden" name="descripcion" value="<%=pedido.descripcion%>">
+                        <input type="submit" value="Entregar">
+                    </form>
                     <hr>
                 <%
+                        }
                     }
                 %>
             </div>

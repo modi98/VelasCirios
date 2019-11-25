@@ -20,6 +20,10 @@
         <servlet-name>CrearPedido</servlet-name>
         <servlet-class>com.servlet.CrearPedido</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EntregarPedido</servlet-name>
+        <servlet-class>com.servlet.EntregarPedido</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>CrearPedido</servlet-name>
         <url-pattern>/CrearPedido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EntregarPedido</servlet-name>
+        <url-pattern>/EntregarPedido</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
