@@ -51,6 +51,18 @@ public class LoginHandler {
         this.stmt.execute(query);
     }
     
+    public void actualizarUsuario(int usuarioId, String nombre, String correo, String rol) throws SQLException {
+        this.checkForDB();
+        this.checkForTable();
+        String query = "UPDATE usuarios SET "
+                + "nombre = '" + nombre + "', "
+                + "correo = '" + correo + "', "
+                + "rol = '" + rol + "' "
+                + "WHERE id = " + usuarioId + ";";
+        this.stmt.execute(query);
+        this.stmt.close();
+    }
+    
     public ArrayList<Usuario> getUsers() throws SQLException {
         this.checkForDB();
         this.checkForTable();
