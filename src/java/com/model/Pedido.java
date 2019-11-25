@@ -13,15 +13,19 @@ import java.util.Date;
  * @author mauri
  */
 public class Pedido {
+    public int id;
     public String nombreCliente;
     public String tel;
     public Date fechaEntrega;
+    public boolean entregado;
     public String descripcion;
 
-    public Pedido(String nombreCliente, String tel, Date fechaEntrega, String descripcion) throws Exception {
+    public Pedido(int id, String nombreCliente, String tel, Date fechaEntrega, boolean entregado, String descripcion) throws Exception {
+        this.id = id;
         this.nombreCliente = nombreCliente;
         this.tel = tel;
         this.fechaEntrega = fechaEntrega;
+        this.entregado = entregado;
         this.descripcion = descripcion;
     }
 }
