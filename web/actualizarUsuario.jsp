@@ -28,6 +28,8 @@
                     %>
                         <li><a class="active" href="listaUsuarios.jsp">Administrar usuarios</a></li>
                     <%
+                        } else {
+                            response.sendRedirect("home.jsp");
                         }
                     %>
                     <li><a href="Logout">Cerrar sesión</a></li>

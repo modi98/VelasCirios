@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -72,29 +73,34 @@ public class CrearUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nombre = request.getParameter("nombre");
-        String correo = request.getParameter("correo");
-        String rol = request.getParameter("rol");
-        String pass = request.getParameter("pass");
-        
-        try {
-            LoginHandler uh = new LoginHandler();
-            uh.createUser(correo, nombre, pass, rol);
-            response.sendRedirect("listaUsuarios.jsp");
-            
-        } catch (SQLException e) {
-            response.setContentType("text/plain");
-            response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(true);
+        if (!session.getAttribute("rol").equals("admin")) {
+            response.sendRedirect("home.jsp");
+        } else {
+            String nombre = request.getParameter("nombre");
+            String correo = request.getParameter("correo");
+            String rol = request.getParameter("rol");
+            String pass = request.getParameter("pass");
 
-            PrintWriter out = response.getWriter();
-            out.println(e);
-            
-        } catch (ClassNotFoundException e) {
-            response.setContentType("text/plain");
-            response.setCharacterEncoding("UTF-8");
+            try {
+                LoginHandler uh = new LoginHandler();
+                uh.createUser(correo, nombre, pass, rol);
+                response.sendRedirect("listaUsuarios.jsp");
 
-            PrintWriter out = response.getWriter();
-            out.println(e);
+            } catch (SQLException e) {
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+
+                PrintWriter out = response.getWriter();
+                out.println(e);
+
+            } catch (ClassNotFoundException e) {
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+
+                PrintWriter out = response.getWriter();
+                out.println(e);
+            }
         }
     }
 
